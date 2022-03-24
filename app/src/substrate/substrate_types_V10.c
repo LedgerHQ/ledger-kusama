@@ -30,7 +30,7 @@ parser_error_t _readAccountId_V10(parser_context_t* c, pd_AccountId_V10_t* v) {
 
 parser_error_t _readAccountIndex_V10(parser_context_t* c, pd_AccountIndex_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
@@ -121,7 +121,7 @@ parser_error_t _readCompactPerBill_V10(parser_context_t* c, pd_CompactPerBill_V1
 
 parser_error_t _readConviction_V10(parser_context_t* c, pd_Conviction_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->value))
     if (v->value > 5) {
         return parser_value_out_of_range;
@@ -140,7 +140,7 @@ parser_error_t _readElectionScore_V10(parser_context_t* c, pd_ElectionScore_V10_
 
 parser_error_t _readEraIndex_V10(parser_context_t* c, pd_EraIndex_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
@@ -203,7 +203,7 @@ parser_error_t _readLeasePeriodOfT_V10(parser_context_t* c, pd_LeasePeriodOfT_V1
 
 parser_error_t _readLookupasStaticLookupSource_V10(parser_context_t* c, pd_LookupasStaticLookupSource_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->value))
     switch (v->value) {
     case 0: // Id
@@ -228,7 +228,7 @@ parser_error_t _readLookupasStaticLookupSource_V10(parser_context_t* c, pd_Looku
 
 parser_error_t _readMemberCount_V10(parser_context_t* c, pd_MemberCount_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
@@ -273,7 +273,7 @@ parser_error_t _readParachainsInherentDataHeader_V10(parser_context_t* c, pd_Par
 
 parser_error_t _readPerbill_V10(parser_context_t* c, pd_Perbill_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
@@ -285,7 +285,7 @@ parser_error_t _readPercent_V10(parser_context_t* c, pd_Percent_V10_t* v)
 
 parser_error_t _readProxyType_V10(parser_context_t* c, pd_ProxyType_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->value))
     if (v->value > 3) {
         return parser_value_out_of_range;
@@ -300,14 +300,14 @@ parser_error_t _readPvfCheckStatement_V10(parser_context_t* c, pd_PvfCheckStatem
 
 parser_error_t _readReferendumIndex_V10(parser_context_t* c, pd_ReferendumIndex_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
 
 parser_error_t _readRegistrarIndex_V10(parser_context_t* c, pd_RegistrarIndex_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
     return parser_ok;
 }
@@ -319,7 +319,7 @@ parser_error_t _readRenouncing_V10(parser_context_t* c, pd_Renouncing_V10_t* v)
 
 parser_error_t _readRewardDestination_V10(parser_context_t* c, pd_RewardDestination_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->value))
     if (v->value > 2) {
         return parser_value_out_of_range;
@@ -376,7 +376,7 @@ parser_error_t _readValidationCode_V10(parser_context_t* c, pd_ValidationCode_V1
 
 parser_error_t _readValidatorPrefs_V10(parser_context_t* c, pd_ValidatorPrefs_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readCompactPerBill_V10(c, &v->commission));
     CHECK_ERROR(_readbool(c, &v->blocked))
     return parser_ok;
@@ -394,14 +394,14 @@ parser_error_t _readVestingInfoBalanceOfTBlockNumber_V10(parser_context_t* c, pd
 
 parser_error_t _readWeightLimit_V10(parser_context_t* c, pd_WeightLimit_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt64(c, &v->value))
     return parser_ok;
 }
 
 parser_error_t _readWeight_V10(parser_context_t* c, pd_Weight_V10_t* v)
 {
-    CHECK_INPUT();
+    CHECK_INPUT()
     CHECK_ERROR(_readUInt64(c, &v->value))
     return parser_ok;
 }
