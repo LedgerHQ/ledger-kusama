@@ -1,18 +1,18 @@
 /*******************************************************************************
-*  (c) 2019 - 2022 Zondax GmbH
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-********************************************************************************/
+ *  (c) 2019 - 2022 Zondax GmbH
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ********************************************************************************/
 #pragma once
 
 #ifdef __cplusplus
@@ -33,6 +33,30 @@ typedef struct {
 typedef struct {
     compactInt_t value;
 } pd_CompactAccountIndex_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_EcdsaPublic_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_EcdsaSignature_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_Ed25519Public_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_Ed25519Signature_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_Sr25519Public_V11_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_Sr25519Signature_V11_t;
 
 typedef struct {
     uint8_t value;
@@ -76,13 +100,21 @@ typedef struct {
 } pd_LookupasStaticLookupSource_V11_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+    uint8_t value;
+    union {
+        pd_Ed25519Signature_V11_t ed25519;
+        pd_Sr25519Signature_V11_t sr25519;
+        pd_EcdsaSignature_V11_t ecdsa;
+    };
 } pd_MultiSignature_V11_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+    uint8_t value;
+    union {
+        pd_Ed25519Public_V11_t ed25519;
+        pd_Sr25519Public_V11_t sr25519;
+        pd_EcdsaPublic_V11_t ecdsa;
+    };
 } pd_MultiSigner_V11_t;
 
 typedef struct {
@@ -132,13 +164,43 @@ typedef struct {
 } pd_AccountVote_V11_t;
 
 typedef struct {
+    uint8_t value;
+    pd_Balance_t freeBalance;
+} pd_BondExtraBalanceOfT_V11_t;
+
+typedef struct {
+    uint8_t value;
+    pd_AccountId_V11_t set;
+} pd_ConfigOpAccountId_V11_t;
+
+typedef struct {
+    uint8_t value;
+    pd_Balance_t set;
+} pd_ConfigOpBalanceOfT_V11_t;
+
+typedef struct {
     pd_Call_t call;
 } pd_OpaqueCall_V11_t;
 
 typedef struct {
     uint8_t some;
+    pd_MultiSignature_V11_t contained;
+} pd_OptionMultiSignature_V11_t;
+
+typedef struct {
+    uint8_t some;
+    pd_MultiSigner_V11_t contained;
+} pd_OptionMultiSigner_V11_t;
+
+typedef struct {
+    uint8_t some;
     pd_Timepoint_V11_t contained;
 } pd_OptionTimepoint_V11_t;
+
+typedef struct {
+    uint8_t value;
+    pd_AccountId_V11_t accountId;
+} pd_RewardDestination_V11_t;
 
 typedef struct {
     pd_CompactPerBill_V11_t commission;
@@ -150,6 +212,12 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecLookupasStaticLookupSource_V11_t;
+
+typedef struct {
+    pd_BalanceOf_t locked;
+    pd_BalanceOf_t per_block;
+    pd_BlockNumber_t starting_block;
+} pd_VestingInfo_V11_t;
 
 typedef struct {
     uint32_t value;
@@ -193,12 +261,7 @@ typedef struct {
 typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoxRawSolutionSolutionOfT_V11_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoxTasConfigIProposal_V11_t;
+} pd_BoxRawSolutionSolutionOfMinerConfig_V11_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -227,11 +290,6 @@ typedef struct {
 typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_ConfigOpBalanceOfT_V11_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_ConfigOpPerbill_V11_t;
 
 typedef struct {
@@ -240,17 +298,13 @@ typedef struct {
 } pd_ConfigOpPercent_V11_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+    uint8_t value;
+    uint32_t set;
 } pd_ConfigOpu32_V11_t;
 
 typedef struct {
     uint8_t value;
 } pd_Conviction_V11_t;
-
-typedef struct {
-    const uint8_t* _ptr;
-} pd_EcdsaSignature_V11_t;
 
 typedef struct {
     uint32_t value;
@@ -325,16 +379,6 @@ typedef struct {
 
 typedef struct {
     uint8_t some;
-    pd_MultiSignature_V11_t contained;
-} pd_OptionMultiSignature_V11_t;
-
-typedef struct {
-    uint8_t some;
-    pd_MultiSigner_V11_t contained;
-} pd_OptionMultiSigner_V11_t;
-
-typedef struct {
-    uint8_t some;
     pd_ProxyType_V11_t contained;
 } pd_OptionProxyType_V11_t;
 
@@ -369,8 +413,7 @@ typedef struct {
 } pd_OverweightIndex_V11_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+    uint32_t value;
 } pd_ParaId_V11_t;
 
 typedef struct {
@@ -383,8 +426,16 @@ typedef struct {
 } pd_Perbill_V11_t;
 
 typedef struct {
-    compactInt_t value;
+    uint8_t value;
 } pd_Percent_V11_t;
+
+typedef struct {
+    uint32_t value;
+} pd_PoolId_V11_t;
+
+typedef struct {
+    uint8_t value;
+} pd_PoolState_V11_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -399,10 +450,6 @@ typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_Renouncing_V11_t;
-
-typedef struct {
-    uint8_t value;
-} pd_RewardDestination_V11_t;
 
 typedef struct {
     uint32_t value;
@@ -456,11 +503,6 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecTupleAccountIdData_V11_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_VestingInfoBalanceOfTBlockNumber_V11_t;
 
 typedef struct {
     uint64_t value;

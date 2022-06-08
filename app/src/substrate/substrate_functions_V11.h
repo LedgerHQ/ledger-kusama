@@ -1,18 +1,18 @@
 /*******************************************************************************
-*  (c) 2019 - 2022 Zondax GmbH
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-********************************************************************************/
+ *  (c) 2019 - 2022 Zondax GmbH
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ********************************************************************************/
 #pragma once
 
 #ifdef __cplusplus
@@ -32,14 +32,14 @@ parser_error_t _readAccountVoteSplit_V11(parser_context_t* c, pd_AccountVoteSpli
 parser_error_t _readAccountVoteStandard_V11(parser_context_t* c, pd_AccountVoteStandard_V11_t* v);
 parser_error_t _readAccountVote_V11(parser_context_t* c, pd_AccountVote_V11_t* v);
 parser_error_t _readAuthorityIdasRuntimeAppPublicSignature_V11(parser_context_t* c, pd_AuthorityIdasRuntimeAppPublicSignature_V11_t* v);
+parser_error_t _readBondExtraBalanceOfT_V11(parser_context_t* c, pd_BondExtraBalanceOfT_V11_t* v);
 parser_error_t _readBoxCallOrHashOfT_V11(parser_context_t* c, pd_BoxCallOrHashOfT_V11_t* v);
 parser_error_t _readBoxEquivocationProofHashBlockNumber_V11(parser_context_t* c, pd_BoxEquivocationProofHashBlockNumber_V11_t* v);
 parser_error_t _readBoxEquivocationProofHeader_V11(parser_context_t* c, pd_BoxEquivocationProofHeader_V11_t* v);
 parser_error_t _readBoxIdentityInfoMaxAdditionalFields_V11(parser_context_t* c, pd_BoxIdentityInfoMaxAdditionalFields_V11_t* v);
 parser_error_t _readBoxMultiLocation_V11(parser_context_t* c, pd_BoxMultiLocation_V11_t* v);
 parser_error_t _readBoxPalletsOrigin_V11(parser_context_t* c, pd_BoxPalletsOrigin_V11_t* v);
-parser_error_t _readBoxRawSolutionSolutionOfT_V11(parser_context_t* c, pd_BoxRawSolutionSolutionOfT_V11_t* v);
-parser_error_t _readBoxTasConfigIProposal_V11(parser_context_t* c, pd_BoxTasConfigIProposal_V11_t* v);
+parser_error_t _readBoxRawSolutionSolutionOfMinerConfig_V11(parser_context_t* c, pd_BoxRawSolutionSolutionOfMinerConfig_V11_t* v);
 parser_error_t _readBoxVersionedMultiAssets_V11(parser_context_t* c, pd_BoxVersionedMultiAssets_V11_t* v);
 parser_error_t _readBoxVersionedMultiLocation_V11(parser_context_t* c, pd_BoxVersionedMultiLocation_V11_t* v);
 parser_error_t _readBoxVersionedXcmTasSysConfigCall_V11(parser_context_t* c, pd_BoxVersionedXcmTasSysConfigCall_V11_t* v);
@@ -47,12 +47,16 @@ parser_error_t _readBoxVersionedXcmTuple_V11(parser_context_t* c, pd_BoxVersione
 parser_error_t _readCallHashOf_V11(parser_context_t* c, pd_CallHashOf_V11_t* v);
 parser_error_t _readCompactAccountIndex_V11(parser_context_t* c, pd_CompactAccountIndex_V11_t* v);
 parser_error_t _readCompactPerBill_V11(parser_context_t* c, pd_CompactPerBill_V11_t* v);
+parser_error_t _readConfigOpAccountId_V11(parser_context_t* c, pd_ConfigOpAccountId_V11_t* v);
 parser_error_t _readConfigOpBalanceOfT_V11(parser_context_t* c, pd_ConfigOpBalanceOfT_V11_t* v);
 parser_error_t _readConfigOpPerbill_V11(parser_context_t* c, pd_ConfigOpPerbill_V11_t* v);
 parser_error_t _readConfigOpPercent_V11(parser_context_t* c, pd_ConfigOpPercent_V11_t* v);
 parser_error_t _readConfigOpu32_V11(parser_context_t* c, pd_ConfigOpu32_V11_t* v);
 parser_error_t _readConviction_V11(parser_context_t* c, pd_Conviction_V11_t* v);
+parser_error_t _readEcdsaPublic_V11(parser_context_t* c, pd_EcdsaPublic_V11_t* v);
 parser_error_t _readEcdsaSignature_V11(parser_context_t* c, pd_EcdsaSignature_V11_t* v);
+parser_error_t _readEd25519Public_V11(parser_context_t* c, pd_Ed25519Public_V11_t* v);
+parser_error_t _readEd25519Signature_V11(parser_context_t* c, pd_Ed25519Signature_V11_t* v);
 parser_error_t _readElectionScore_V11(parser_context_t* c, pd_ElectionScore_V11_t* v);
 parser_error_t _readEraIndex_V11(parser_context_t* c, pd_EraIndex_V11_t* v);
 parser_error_t _readEthereumAddress_V11(parser_context_t* c, pd_EthereumAddress_V11_t* v);
@@ -89,6 +93,8 @@ parser_error_t _readParaId_V11(parser_context_t* c, pd_ParaId_V11_t* v);
 parser_error_t _readParachainsInherentDataHeader_V11(parser_context_t* c, pd_ParachainsInherentDataHeader_V11_t* v);
 parser_error_t _readPerbill_V11(parser_context_t* c, pd_Perbill_V11_t* v);
 parser_error_t _readPercent_V11(parser_context_t* c, pd_Percent_V11_t* v);
+parser_error_t _readPoolId_V11(parser_context_t* c, pd_PoolId_V11_t* v);
+parser_error_t _readPoolState_V11(parser_context_t* c, pd_PoolState_V11_t* v);
 parser_error_t _readProxyType_V11(parser_context_t* c, pd_ProxyType_V11_t* v);
 parser_error_t _readPvfCheckStatement_V11(parser_context_t* c, pd_PvfCheckStatement_V11_t* v);
 parser_error_t _readReferendumIndex_V11(parser_context_t* c, pd_ReferendumIndex_V11_t* v);
@@ -97,6 +103,8 @@ parser_error_t _readRenouncing_V11(parser_context_t* c, pd_Renouncing_V11_t* v);
 parser_error_t _readRewardDestination_V11(parser_context_t* c, pd_RewardDestination_V11_t* v);
 parser_error_t _readSessionIndex_V11(parser_context_t* c, pd_SessionIndex_V11_t* v);
 parser_error_t _readSolutionOrSnapshotSize_V11(parser_context_t* c, pd_SolutionOrSnapshotSize_V11_t* v);
+parser_error_t _readSr25519Public_V11(parser_context_t* c, pd_Sr25519Public_V11_t* v);
+parser_error_t _readSr25519Signature_V11(parser_context_t* c, pd_Sr25519Signature_V11_t* v);
 parser_error_t _readStatementKind_V11(parser_context_t* c, pd_StatementKind_V11_t* v);
 parser_error_t _readSupportsAccountId_V11(parser_context_t* c, pd_SupportsAccountId_V11_t* v);
 parser_error_t _readTimepoint_V11(parser_context_t* c, pd_Timepoint_V11_t* v);
@@ -111,7 +119,7 @@ parser_error_t _readVecKeyValue_V11(parser_context_t* c, pd_VecKeyValue_V11_t* v
 parser_error_t _readVecKey_V11(parser_context_t* c, pd_VecKey_V11_t* v);
 parser_error_t _readVecLookupasStaticLookupSource_V11(parser_context_t* c, pd_VecLookupasStaticLookupSource_V11_t* v);
 parser_error_t _readVecTupleAccountIdData_V11(parser_context_t* c, pd_VecTupleAccountIdData_V11_t* v);
-parser_error_t _readVestingInfoBalanceOfTBlockNumber_V11(parser_context_t* c, pd_VestingInfoBalanceOfTBlockNumber_V11_t* v);
+parser_error_t _readVestingInfo_V11(parser_context_t* c, pd_VestingInfo_V11_t* v);
 parser_error_t _readVote_V11(parser_context_t* c, pd_Vote_V11_t* v);
 parser_error_t _readWeightLimit_V11(parser_context_t* c, pd_WeightLimit_V11_t* v);
 parser_error_t _readWeight_V11(parser_context_t* c, pd_Weight_V11_t* v);
@@ -162,6 +170,13 @@ parser_error_t _toStringAuthorityIdasRuntimeAppPublicSignature_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringBondExtraBalanceOfT_V11(
+    const pd_BondExtraBalanceOfT_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringBoxCallOrHashOfT_V11(
     const pd_BoxCallOrHashOfT_V11_t* v,
     char* outValue,
@@ -204,15 +219,8 @@ parser_error_t _toStringBoxPalletsOrigin_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringBoxRawSolutionSolutionOfT_V11(
-    const pd_BoxRawSolutionSolutionOfT_V11_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoxTasConfigIProposal_V11(
-    const pd_BoxTasConfigIProposal_V11_t* v,
+parser_error_t _toStringBoxRawSolutionSolutionOfMinerConfig_V11(
+    const pd_BoxRawSolutionSolutionOfMinerConfig_V11_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -267,6 +275,13 @@ parser_error_t _toStringCompactPerBill_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringConfigOpAccountId_V11(
+    const pd_ConfigOpAccountId_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringConfigOpBalanceOfT_V11(
     const pd_ConfigOpBalanceOfT_V11_t* v,
     char* outValue,
@@ -302,8 +317,29 @@ parser_error_t _toStringConviction_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringEcdsaPublic_V11(
+    const pd_EcdsaPublic_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringEcdsaSignature_V11(
     const pd_EcdsaSignature_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringEd25519Public_V11(
+    const pd_Ed25519Public_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringEd25519Signature_V11(
+    const pd_Ed25519Signature_V11_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -561,6 +597,20 @@ parser_error_t _toStringPercent_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringPoolId_V11(
+    const pd_PoolId_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringPoolState_V11(
+    const pd_PoolState_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringProxyType_V11(
     const pd_ProxyType_V11_t* v,
     char* outValue,
@@ -612,6 +662,20 @@ parser_error_t _toStringSessionIndex_V11(
 
 parser_error_t _toStringSolutionOrSnapshotSize_V11(
     const pd_SolutionOrSnapshotSize_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringSr25519Public_V11(
+    const pd_Sr25519Public_V11_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringSr25519Signature_V11(
+    const pd_Sr25519Signature_V11_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -715,8 +779,8 @@ parser_error_t _toStringVecTupleAccountIdData_V11(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringVestingInfoBalanceOfTBlockNumber_V11(
-    const pd_VestingInfoBalanceOfTBlockNumber_V11_t* v,
+parser_error_t _toStringVestingInfo_V11(
+    const pd_VestingInfo_V11_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

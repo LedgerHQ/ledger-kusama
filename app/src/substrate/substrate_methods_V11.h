@@ -1,18 +1,18 @@
 /*******************************************************************************
-*  (c) 2019 - 2022 Zondax GmbH
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-********************************************************************************/
+ *  (c) 2019 - 2022 Zondax GmbH
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ********************************************************************************/
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextern-c-compat"
 #pragma once
@@ -49,16 +49,19 @@ extern "C" {
 #define PD_CALL_MULTISIG_V11 31
 #define PD_CALL_PREIMAGE_V11 32
 #define PD_CALL_BOUNTIES_V11 35
+#define PD_CALL_CHILDBOUNTIES_V11 40
 #define PD_CALL_TIPS_V11 36
 #define PD_CALL_ELECTIONPROVIDERMULTIPHASE_V11 37
 #define PD_CALL_GILT_V11 38
-#define PD_CALL_BAGSLIST_V11 39
+#define PD_CALL_VOTERLIST_V11 39
+#define PD_CALL_NOMINATIONPOOLS_V11 41
 #define PD_CALL_CONFIGURATION_V11 51
 #define PD_CALL_INITIALIZER_V11 57
 #define PD_CALL_HRMP_V11 60
 #define PD_CALL_PARASDISPUTES_V11 62
 #define PD_CALL_REGISTRAR_V11 70
 #define PD_CALL_AUCTIONS_V11 72
+#define PD_CALL_CROWDLOAN_V11 73
 
 #define PD_CALL_BALANCES_TRANSFER_ALL_V11 4
 typedef struct {
@@ -143,6 +146,71 @@ typedef struct {
     pd_VecCall_t calls;
 } pd_utility_batch_all_V11_t;
 
+#define PD_CALL_UTILITY_FORCE_BATCH_V11 4
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_force_batch_V11_t;
+
+#define PD_CALL_CROWDLOAN_CREATE_V11 0
+typedef struct {
+    pd_Compactu32_t index;
+    pd_Compactu128_t cap;
+    pd_Compactu32_t first_period;
+    pd_Compactu32_t last_period;
+    pd_Compactu32_t end;
+    pd_OptionMultiSigner_V11_t verifier;
+} pd_crowdloan_create_V11_t;
+
+#define PD_CALL_CROWDLOAN_CONTRIBUTE_V11 1
+typedef struct {
+    pd_Compactu32_t index;
+    pd_Compactu128_t amount;
+    pd_OptionMultiSignature_V11_t signature;
+} pd_crowdloan_contribute_V11_t;
+
+#define PD_CALL_CROWDLOAN_WITHDRAW_V11 2
+typedef struct {
+    pd_AccountId_V11_t who;
+    pd_Compactu32_t index;
+} pd_crowdloan_withdraw_V11_t;
+
+#define PD_CALL_CROWDLOAN_REFUND_V11 3
+typedef struct {
+    pd_Compactu32_t index;
+} pd_crowdloan_refund_V11_t;
+
+#define PD_CALL_CROWDLOAN_DISSOLVE_V11 4
+typedef struct {
+    pd_Compactu32_t index;
+} pd_crowdloan_dissolve_V11_t;
+
+#define PD_CALL_CROWDLOAN_EDIT_V11 5
+typedef struct {
+    pd_Compactu32_t index;
+    pd_Compactu128_t cap;
+    pd_Compactu32_t first_period;
+    pd_Compactu32_t last_period;
+    pd_Compactu32_t end;
+    pd_OptionMultiSigner_V11_t verifier;
+} pd_crowdloan_edit_V11_t;
+
+#define PD_CALL_CROWDLOAN_ADD_MEMO_V11 6
+typedef struct {
+    pd_ParaId_V11_t index;
+    pd_Vecu8_t memo;
+} pd_crowdloan_add_memo_V11_t;
+
+#define PD_CALL_CROWDLOAN_POKE_V11 7
+typedef struct {
+    pd_ParaId_V11_t index;
+} pd_crowdloan_poke_V11_t;
+
+#define PD_CALL_CROWDLOAN_CONTRIBUTE_ALL_V11 8
+typedef struct {
+    pd_Compactu32_t index;
+    pd_OptionMultiSignature_V11_t signature;
+} pd_crowdloan_contribute_all_V11_t;
+
 #ifdef SUBSTRATE_PARSER_FULL
 
 #define PD_CALL_TIMESTAMP_SET_V11 0
@@ -202,6 +270,11 @@ typedef struct {
 typedef struct {
 } pd_staking_force_new_era_V11_t;
 
+#define PD_CALL_STAKING_SET_INVULNERABLES_V11 14
+typedef struct {
+    pd_VecAccountId_V11_t invulnerables;
+} pd_staking_set_invulnerables_V11_t;
+
 #define PD_CALL_STAKING_FORCE_UNSTAKE_V11 15
 typedef struct {
     pd_AccountId_V11_t stash;
@@ -211,6 +284,12 @@ typedef struct {
 #define PD_CALL_STAKING_FORCE_NEW_ERA_ALWAYS_V11 16
 typedef struct {
 } pd_staking_force_new_era_always_V11_t;
+
+#define PD_CALL_STAKING_CANCEL_DEFERRED_SLASH_V11 17
+typedef struct {
+    pd_EraIndex_V11_t era;
+    pd_Vecu32_t slash_indices;
+} pd_staking_cancel_deferred_slash_V11_t;
 
 #define PD_CALL_STAKING_SET_HISTORY_DEPTH_V11 20
 typedef struct {
@@ -373,6 +452,26 @@ typedef struct {
     pd_Compactu32_t prop_index;
 } pd_democracy_cancel_proposal_V11_t;
 
+#define PD_CALL_COUNCIL_SET_MEMBERS_V11 0
+typedef struct {
+    pd_VecAccountId_V11_t new_members;
+    pd_OptionAccountId_V11_t prime;
+    pd_MemberCount_V11_t old_count;
+} pd_council_set_members_V11_t;
+
+#define PD_CALL_COUNCIL_EXECUTE_V11 1
+typedef struct {
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_council_execute_V11_t;
+
+#define PD_CALL_COUNCIL_PROPOSE_V11 2
+typedef struct {
+    pd_Compactu32_t threshold;
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_council_propose_V11_t;
+
 #define PD_CALL_COUNCIL_VOTE_V11 3
 typedef struct {
     pd_Hash_t proposal;
@@ -393,10 +492,51 @@ typedef struct {
     pd_Hash_t proposal_hash;
 } pd_council_disapprove_proposal_V11_t;
 
+#define PD_CALL_TECHNICALCOMMITTEE_SET_MEMBERS_V11 0
+typedef struct {
+    pd_VecAccountId_V11_t new_members;
+    pd_OptionAccountId_V11_t prime;
+    pd_MemberCount_V11_t old_count;
+} pd_technicalcommittee_set_members_V11_t;
+
+#define PD_CALL_TECHNICALCOMMITTEE_EXECUTE_V11 1
+typedef struct {
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_technicalcommittee_execute_V11_t;
+
+#define PD_CALL_TECHNICALCOMMITTEE_PROPOSE_V11 2
+typedef struct {
+    pd_Compactu32_t threshold;
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_technicalcommittee_propose_V11_t;
+
+#define PD_CALL_TECHNICALCOMMITTEE_VOTE_V11 3
+typedef struct {
+    pd_Hash_t proposal;
+    pd_Compactu32_t index;
+    pd_bool_t approve;
+} pd_technicalcommittee_vote_V11_t;
+
+#define PD_CALL_TECHNICALCOMMITTEE_CLOSE_V11 4
+typedef struct {
+    pd_Hash_t proposal_hash;
+    pd_Compactu32_t index;
+    pd_Compactu64_t proposal_weight_bound;
+    pd_Compactu32_t length_bound;
+} pd_technicalcommittee_close_V11_t;
+
 #define PD_CALL_TECHNICALCOMMITTEE_DISAPPROVE_PROPOSAL_V11 5
 typedef struct {
     pd_Hash_t proposal_hash;
 } pd_technicalcommittee_disapprove_proposal_V11_t;
+
+#define PD_CALL_PHRAGMENELECTION_VOTE_V11 0
+typedef struct {
+    pd_VecAccountId_V11_t votes;
+    pd_Compactu128_t amount;
+} pd_phragmenelection_vote_V11_t;
 
 #define PD_CALL_PHRAGMENELECTION_REMOVE_VOTER_V11 1
 typedef struct {
@@ -469,6 +609,11 @@ typedef struct {
 typedef struct {
     pd_Compactu32_t proposal_id;
 } pd_treasury_approve_proposal_V11_t;
+
+#define PD_CALL_TREASURY_REMOVE_APPROVAL_V11 3
+typedef struct {
+    pd_Compactu32_t proposal_id;
+} pd_treasury_remove_approval_V11_t;
 
 #define PD_CALL_CLAIMS_CLAIM_V11 0
 typedef struct {
@@ -543,7 +688,7 @@ typedef struct {
 
 #define PD_CALL_SOCIETY_BID_V11 0
 typedef struct {
-    pd_Balance_t amount;
+    pd_BalanceOf_t amount;
 } pd_society_bid_V11_t;
 
 #define PD_CALL_SOCIETY_UNBID_V11 1
@@ -554,8 +699,8 @@ typedef struct {
 #define PD_CALL_SOCIETY_VOUCH_V11 2
 typedef struct {
     pd_AccountId_V11_t who;
-    pd_Balance_t amount;
-    pd_Balance_t tip;
+    pd_BalanceOf_t amount;
+    pd_BalanceOf_t tip;
 } pd_society_vouch_V11_t;
 
 #define PD_CALL_SOCIETY_UNVOUCH_V11 3
@@ -644,6 +789,19 @@ typedef struct {
 typedef struct {
     pd_LookupasStaticLookupSource_V11_t target;
 } pd_vesting_vest_other_V11_t;
+
+#define PD_CALL_VESTING_VESTED_TRANSFER_V11 2
+typedef struct {
+    pd_LookupasStaticLookupSource_V11_t target;
+    pd_VestingInfo_V11_t schedule;
+} pd_vesting_vested_transfer_V11_t;
+
+#define PD_CALL_VESTING_FORCE_VESTED_TRANSFER_V11 3
+typedef struct {
+    pd_LookupasStaticLookupSource_V11_t source;
+    pd_LookupasStaticLookupSource_V11_t target;
+    pd_VestingInfo_V11_t schedule;
+} pd_vesting_force_vested_transfer_V11_t;
 
 #define PD_CALL_VESTING_MERGE_SCHEDULES_V11 4
 typedef struct {
@@ -763,6 +921,52 @@ typedef struct {
     pd_Bytes_t remark;
 } pd_bounties_extend_bounty_expiry_V11_t;
 
+#define PD_CALL_CHILDBOUNTIES_ADD_CHILD_BOUNTY_V11 0
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_CompactBalance_t amount;
+    pd_Vecu8_t description;
+} pd_childbounties_add_child_bounty_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_PROPOSE_CURATOR_V11 1
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+    pd_LookupasStaticLookupSource_V11_t curator;
+    pd_CompactBalance_t fee;
+} pd_childbounties_propose_curator_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_ACCEPT_CURATOR_V11 2
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+} pd_childbounties_accept_curator_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_UNASSIGN_CURATOR_V11 3
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+} pd_childbounties_unassign_curator_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_AWARD_CHILD_BOUNTY_V11 4
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+    pd_LookupasStaticLookupSource_V11_t beneficiary;
+} pd_childbounties_award_child_bounty_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_CLAIM_CHILD_BOUNTY_V11 5
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+} pd_childbounties_claim_child_bounty_V11_t;
+
+#define PD_CALL_CHILDBOUNTIES_CLOSE_CHILD_BOUNTY_V11 6
+typedef struct {
+    pd_Compactu32_t parent_bounty_id;
+    pd_Compactu32_t child_bounty_id;
+} pd_childbounties_close_child_bounty_V11_t;
+
 #define PD_CALL_TIPS_REPORT_AWESOME_V11 0
 typedef struct {
     pd_Bytes_t reason;
@@ -815,15 +1019,101 @@ typedef struct {
     pd_u32_t duration;
 } pd_gilt_retract_bid_V11_t;
 
-#define PD_CALL_BAGSLIST_REBAG_V11 0
+#define PD_CALL_GILT_SET_TARGET_V11 2
+typedef struct {
+    pd_Compactu64_t target;
+} pd_gilt_set_target_V11_t;
+
+#define PD_CALL_GILT_THAW_V11 3
+typedef struct {
+    pd_Compactu32_t index;
+} pd_gilt_thaw_V11_t;
+
+#define PD_CALL_VOTERLIST_REBAG_V11 0
 typedef struct {
     pd_AccountId_V11_t dislocated;
-} pd_bagslist_rebag_V11_t;
+} pd_voterlist_rebag_V11_t;
 
-#define PD_CALL_BAGSLIST_PUT_IN_FRONT_OF_V11 1
+#define PD_CALL_VOTERLIST_PUT_IN_FRONT_OF_V11 1
 typedef struct {
     pd_AccountId_V11_t lighter;
-} pd_bagslist_put_in_front_of_V11_t;
+} pd_voterlist_put_in_front_of_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_JOIN_V11 0
+typedef struct {
+    pd_Compactu128_t amount;
+    pd_PoolId_V11_t pool_id;
+} pd_nominationpools_join_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_BOND_EXTRA_V11 1
+typedef struct {
+    pd_BondExtraBalanceOfT_V11_t extra;
+} pd_nominationpools_bond_extra_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_CLAIM_PAYOUT_V11 2
+typedef struct {
+} pd_nominationpools_claim_payout_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_UNBOND_V11 3
+typedef struct {
+    pd_AccountId_V11_t member_account;
+    pd_Compactu128_t unbonding_points;
+} pd_nominationpools_unbond_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_POOL_WITHDRAW_UNBONDED_V11 4
+typedef struct {
+    pd_PoolId_V11_t pool_id;
+    pd_u32_t num_slashing_spans;
+} pd_nominationpools_pool_withdraw_unbonded_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_WITHDRAW_UNBONDED_V11 5
+typedef struct {
+    pd_AccountId_V11_t member_account;
+    pd_u32_t num_slashing_spans;
+} pd_nominationpools_withdraw_unbonded_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_CREATE_V11 6
+typedef struct {
+    pd_Compactu128_t amount;
+    pd_AccountId_V11_t root;
+    pd_AccountId_V11_t nominator;
+    pd_AccountId_V11_t state_toggler;
+} pd_nominationpools_create_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_NOMINATE_V11 7
+typedef struct {
+    pd_PoolId_V11_t pool_id;
+    pd_VecAccountId_V11_t validators;
+} pd_nominationpools_nominate_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_SET_STATE_V11 8
+typedef struct {
+    pd_PoolId_V11_t pool_id;
+    pd_PoolState_V11_t state;
+} pd_nominationpools_set_state_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_SET_METADATA_V11 9
+typedef struct {
+    pd_PoolId_V11_t pool_id;
+    pd_Vecu8_t metadata;
+} pd_nominationpools_set_metadata_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_SET_CONFIGS_V11 10
+typedef struct {
+    pd_ConfigOpBalanceOfT_V11_t min_join_bond;
+    pd_ConfigOpBalanceOfT_V11_t min_create_bond;
+    pd_ConfigOpu32_V11_t max_pools;
+    pd_ConfigOpu32_V11_t max_members;
+    pd_ConfigOpu32_V11_t max_members_per_pool;
+} pd_nominationpools_set_configs_V11_t;
+
+#define PD_CALL_NOMINATIONPOOLS_UPDATE_ROLES_V11 11
+typedef struct {
+    pd_PoolId_V11_t pool_id;
+    pd_ConfigOpAccountId_V11_t new_root;
+    pd_ConfigOpAccountId_V11_t new_nominator;
+    pd_ConfigOpAccountId_V11_t new_state_toggler;
+} pd_nominationpools_update_roles_V11_t;
 
 #define PD_CALL_CONFIGURATION_SET_VALIDATION_UPGRADE_COOLDOWN_V11 0
 typedef struct {
@@ -1111,6 +1401,16 @@ typedef union {
     pd_session_purge_keys_V11_t session_purge_keys_V11;
     pd_utility_batch_V11_t utility_batch_V11;
     pd_utility_batch_all_V11_t utility_batch_all_V11;
+    pd_utility_force_batch_V11_t utility_force_batch_V11;
+    pd_crowdloan_create_V11_t crowdloan_create_V11;
+    pd_crowdloan_contribute_V11_t crowdloan_contribute_V11;
+    pd_crowdloan_withdraw_V11_t crowdloan_withdraw_V11;
+    pd_crowdloan_refund_V11_t crowdloan_refund_V11;
+    pd_crowdloan_dissolve_V11_t crowdloan_dissolve_V11;
+    pd_crowdloan_edit_V11_t crowdloan_edit_V11;
+    pd_crowdloan_add_memo_V11_t crowdloan_add_memo_V11;
+    pd_crowdloan_poke_V11_t crowdloan_poke_V11;
+    pd_crowdloan_contribute_all_V11_t crowdloan_contribute_all_V11;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_timestamp_set_V11_t timestamp_set_V11;
     pd_indices_claim_V11_t indices_claim_V11;
@@ -1123,8 +1423,10 @@ typedef union {
     pd_staking_increase_validator_count_V11_t staking_increase_validator_count_V11;
     pd_staking_force_no_eras_V11_t staking_force_no_eras_V11;
     pd_staking_force_new_era_V11_t staking_force_new_era_V11;
+    pd_staking_set_invulnerables_V11_t staking_set_invulnerables_V11;
     pd_staking_force_unstake_V11_t staking_force_unstake_V11;
     pd_staking_force_new_era_always_V11_t staking_force_new_era_always_V11;
+    pd_staking_cancel_deferred_slash_V11_t staking_cancel_deferred_slash_V11;
     pd_staking_set_history_depth_V11_t staking_set_history_depth_V11;
     pd_staking_reap_stash_V11_t staking_reap_stash_V11;
     pd_staking_kick_V11_t staking_kick_V11;
@@ -1155,10 +1457,19 @@ typedef union {
     pd_democracy_remove_other_vote_V11_t democracy_remove_other_vote_V11;
     pd_democracy_enact_proposal_V11_t democracy_enact_proposal_V11;
     pd_democracy_cancel_proposal_V11_t democracy_cancel_proposal_V11;
+    pd_council_set_members_V11_t council_set_members_V11;
+    pd_council_execute_V11_t council_execute_V11;
+    pd_council_propose_V11_t council_propose_V11;
     pd_council_vote_V11_t council_vote_V11;
     pd_council_close_V11_t council_close_V11;
     pd_council_disapprove_proposal_V11_t council_disapprove_proposal_V11;
+    pd_technicalcommittee_set_members_V11_t technicalcommittee_set_members_V11;
+    pd_technicalcommittee_execute_V11_t technicalcommittee_execute_V11;
+    pd_technicalcommittee_propose_V11_t technicalcommittee_propose_V11;
+    pd_technicalcommittee_vote_V11_t technicalcommittee_vote_V11;
+    pd_technicalcommittee_close_V11_t technicalcommittee_close_V11;
     pd_technicalcommittee_disapprove_proposal_V11_t technicalcommittee_disapprove_proposal_V11;
+    pd_phragmenelection_vote_V11_t phragmenelection_vote_V11;
     pd_phragmenelection_remove_voter_V11_t phragmenelection_remove_voter_V11;
     pd_phragmenelection_submit_candidacy_V11_t phragmenelection_submit_candidacy_V11;
     pd_phragmenelection_remove_member_V11_t phragmenelection_remove_member_V11;
@@ -1173,6 +1484,7 @@ typedef union {
     pd_treasury_propose_spend_V11_t treasury_propose_spend_V11;
     pd_treasury_reject_proposal_V11_t treasury_reject_proposal_V11;
     pd_treasury_approve_proposal_V11_t treasury_approve_proposal_V11;
+    pd_treasury_remove_approval_V11_t treasury_remove_approval_V11;
     pd_claims_claim_V11_t claims_claim_V11;
     pd_claims_claim_attest_V11_t claims_claim_attest_V11;
     pd_claims_attest_V11_t claims_attest_V11;
@@ -1206,6 +1518,8 @@ typedef union {
     pd_recovery_cancel_recovered_V11_t recovery_cancel_recovered_V11;
     pd_vesting_vest_V11_t vesting_vest_V11;
     pd_vesting_vest_other_V11_t vesting_vest_other_V11;
+    pd_vesting_vested_transfer_V11_t vesting_vested_transfer_V11;
+    pd_vesting_force_vested_transfer_V11_t vesting_force_vested_transfer_V11;
     pd_vesting_merge_schedules_V11_t vesting_merge_schedules_V11;
     pd_proxy_add_proxy_V11_t proxy_add_proxy_V11;
     pd_proxy_remove_proxy_V11_t proxy_remove_proxy_V11;
@@ -1226,6 +1540,13 @@ typedef union {
     pd_bounties_claim_bounty_V11_t bounties_claim_bounty_V11;
     pd_bounties_close_bounty_V11_t bounties_close_bounty_V11;
     pd_bounties_extend_bounty_expiry_V11_t bounties_extend_bounty_expiry_V11;
+    pd_childbounties_add_child_bounty_V11_t childbounties_add_child_bounty_V11;
+    pd_childbounties_propose_curator_V11_t childbounties_propose_curator_V11;
+    pd_childbounties_accept_curator_V11_t childbounties_accept_curator_V11;
+    pd_childbounties_unassign_curator_V11_t childbounties_unassign_curator_V11;
+    pd_childbounties_award_child_bounty_V11_t childbounties_award_child_bounty_V11;
+    pd_childbounties_claim_child_bounty_V11_t childbounties_claim_child_bounty_V11;
+    pd_childbounties_close_child_bounty_V11_t childbounties_close_child_bounty_V11;
     pd_tips_report_awesome_V11_t tips_report_awesome_V11;
     pd_tips_retract_tip_V11_t tips_retract_tip_V11;
     pd_tips_tip_new_V11_t tips_tip_new_V11;
@@ -1235,8 +1556,22 @@ typedef union {
     pd_electionprovidermultiphase_governance_fallback_V11_t electionprovidermultiphase_governance_fallback_V11;
     pd_gilt_place_bid_V11_t gilt_place_bid_V11;
     pd_gilt_retract_bid_V11_t gilt_retract_bid_V11;
-    pd_bagslist_rebag_V11_t bagslist_rebag_V11;
-    pd_bagslist_put_in_front_of_V11_t bagslist_put_in_front_of_V11;
+    pd_gilt_set_target_V11_t gilt_set_target_V11;
+    pd_gilt_thaw_V11_t gilt_thaw_V11;
+    pd_voterlist_rebag_V11_t voterlist_rebag_V11;
+    pd_voterlist_put_in_front_of_V11_t voterlist_put_in_front_of_V11;
+    pd_nominationpools_join_V11_t nominationpools_join_V11;
+    pd_nominationpools_bond_extra_V11_t nominationpools_bond_extra_V11;
+    pd_nominationpools_claim_payout_V11_t nominationpools_claim_payout_V11;
+    pd_nominationpools_unbond_V11_t nominationpools_unbond_V11;
+    pd_nominationpools_pool_withdraw_unbonded_V11_t nominationpools_pool_withdraw_unbonded_V11;
+    pd_nominationpools_withdraw_unbonded_V11_t nominationpools_withdraw_unbonded_V11;
+    pd_nominationpools_create_V11_t nominationpools_create_V11;
+    pd_nominationpools_nominate_V11_t nominationpools_nominate_V11;
+    pd_nominationpools_set_state_V11_t nominationpools_set_state_V11;
+    pd_nominationpools_set_metadata_V11_t nominationpools_set_metadata_V11;
+    pd_nominationpools_set_configs_V11_t nominationpools_set_configs_V11;
+    pd_nominationpools_update_roles_V11_t nominationpools_update_roles_V11;
     pd_configuration_set_validation_upgrade_cooldown_V11_t configuration_set_validation_upgrade_cooldown_V11;
     pd_configuration_set_validation_upgrade_delay_V11_t configuration_set_validation_upgrade_delay_V11;
     pd_configuration_set_code_retention_period_V11_t configuration_set_code_retention_period_V11;
