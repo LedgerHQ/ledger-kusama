@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ static const char* STR_MO_PARASDISPUTES = "Parasdisputes";
 static const char* STR_MO_REGISTRAR = "Registrar";
 static const char* STR_MO_AUCTIONS = "Auctions";
 static const char* STR_MO_CROWDLOAN = "Crowdloan";
+static const char* STR_MO_UMP = "Ump";
 
 // Methods names
 static const char* STR_ME_FILL_BLOCK = "Fill block";
@@ -142,6 +143,7 @@ static const char* STR_ME_CLEAR_PRIME = "Clear prime";
 static const char* STR_ME_PROPOSE_SPEND = "Propose spend";
 static const char* STR_ME_REJECT_PROPOSAL = "Reject proposal";
 static const char* STR_ME_APPROVE_PROPOSAL = "Approve proposal";
+static const char* STR_ME_SPEND = "Spend";
 static const char* STR_ME_REMOVE_APPROVAL = "Remove approval";
 static const char* STR_ME_CLAIM_ATTEST = "Claim attest";
 static const char* STR_ME_ATTEST = "Attest";
@@ -288,7 +290,7 @@ static const char* STR_ME_EDIT = "Edit";
 static const char* STR_ME_ADD_MEMO = "Add memo";
 static const char* STR_ME_POKE = "Poke";
 static const char* STR_ME_CONTRIBUTE_ALL = "Contribute all";
-static const char* STR_ME_SPEND = "Spend";
+static const char* STR_ME_SERVICE_OVERWEIGHT = "Service overweight";
 
 // Items names
 static const char* STR_IT_ratio = "Ratio";
@@ -360,7 +362,8 @@ static const char* STR_IT_proposal_weight_bound = "Proposal weight bound";
 static const char* STR_IT_votes = "Votes";
 static const char* STR_IT_candidate_count = "Candidate count";
 static const char* STR_IT_renouncing = "Renouncing";
-static const char* STR_IT_has_replacement = "Has replacement";
+static const char* STR_IT_slash_bond = "Slash bond";
+static const char* STR_IT_rerun_election = "Rerun election";
 static const char* STR_IT_num_voters = "Num voters";
 static const char* STR_IT_num_defunct = "Num defunct";
 static const char* STR_IT_remove = "Remove";
@@ -476,6 +479,7 @@ static const char* STR_IT_end = "End";
 static const char* STR_IT_verifier = "Verifier";
 static const char* STR_IT_signature = "Signature";
 static const char* STR_IT_memo = "Memo";
+static const char* STR_IT_weight_limit = "Weight limit";
 
 #ifdef __cplusplus
 }
