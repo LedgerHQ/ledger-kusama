@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,28 +22,28 @@ extern "C" {
 #include "parser_impl.h"
 #include "stdbool.h"
 #include "substrate_functions.h"
-#include "substrate_functions_V11.h"
+#include "substrate_functions_V13.h"
 #include <stddef.h>
 #include <stdint.h>
 
-parser_error_t _readMethod_V11(parser_context_t* c, uint8_t moduleIdx, uint8_t callIdx, pd_Method_V11_t* method);
+parser_error_t _readMethod_V13(parser_context_t* c, uint8_t moduleIdx, uint8_t callIdx, pd_Method_V13_t* method);
 
-const char* _getMethod_ModuleName_V11(uint8_t moduleIdx);
+const char* _getMethod_ModuleName_V13(uint8_t moduleIdx);
 
-const char* _getMethod_Name_V11(uint8_t moduleIdx, uint8_t callIdx);
-const char* _getMethod_Name_V11_ParserFull(uint16_t callPrivIdx);
+const char* _getMethod_Name_V13(uint8_t moduleIdx, uint8_t callIdx);
+const char* _getMethod_Name_V13_ParserFull(uint16_t callPrivIdx);
 
-const char* _getMethod_ItemName_V11(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
+const char* _getMethod_ItemName_V13(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
 
-uint8_t _getMethod_NumItems_V11(uint8_t moduleIdx, uint8_t callIdx);
+uint8_t _getMethod_NumItems_V13(uint8_t moduleIdx, uint8_t callIdx);
 
-parser_error_t _getMethod_ItemValue_V11(
-    pd_Method_V11_t* m, uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
+parser_error_t _getMethod_ItemValue_V13(
+    pd_Method_V13_t* m, uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx,
     char* outValue, uint16_t outValueLen,
     uint8_t pageIdx, uint8_t* pageCount);
 
-bool _getMethod_ItemIsExpert_V11(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
-bool _getMethod_IsNestingSupported_V11(uint8_t moduleIdx, uint8_t callIdx);
+bool _getMethod_ItemIsExpert_V13(uint8_t moduleIdx, uint8_t callIdx, uint8_t itemIdx);
+bool _getMethod_IsNestingSupported_V13(uint8_t moduleIdx, uint8_t callIdx);
 
 #ifdef __cplusplus
 }
